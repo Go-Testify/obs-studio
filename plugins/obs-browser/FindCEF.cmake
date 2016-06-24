@@ -7,11 +7,11 @@ find_path(CEF_INCLUDE_DIR "include/cef_version.h"
 
 find_library(CEF_LIBRARY
 	NAMES cef libcef cef.lib libcef.o "Chromium Embedded Framework"
-	PATHS c:/cef c:/cef/Release)
+	PATHS c:/cef c:/cef/Debug)
 
 find_library(CEFWRAPPER_LIBRARY
 	NAMES cef_dll_wrapper libcef_dll_wrapper
-	PATHS c:/cef/build/libcef_dll/Release)
+	PATHS c:/cef/build/libcef_dll/Debug)
 
 if (NOT CEF_LIBRARY)
 	message(FATAL_ERROR "Could not find the CEF shared library" )

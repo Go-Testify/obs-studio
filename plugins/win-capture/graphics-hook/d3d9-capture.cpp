@@ -61,9 +61,9 @@ struct d3d9_data {
 			int                    copy_wait;
 		};
 	};
-};
+} data;
 
-static struct d3d9_data data = {};
+//static struct d3d9_data data = {};
 
 static void d3d9_free()
 {
