@@ -28,6 +28,7 @@
 #include <util/util.hpp>
 #include <util/platform.h>
 #include <util/profiler.hpp>
+#include <../ipc-util/ipc-util/pipe.h>
 #include <graphics/math-defs.h>
 
 #include "obs-app.hpp"
@@ -598,6 +599,17 @@ retryScene:
 
 	obs_data_release(data);
 
+	_unityPipe = (ipc_pipe_server*)malloc(sizeof(ipc_pipe_server));
+
+	if (!ipc_pipe_server_start(_unityPipe, "unitypipe", unityPipeCallback, this)) {
+
+		blog(LOG_ERROR, "Failed to set up desktop pipe");
+	}
+	else {
+
+		blog(LOG_DEBUG, "Pipe ready and listeneing");
+	}
+
 	if (!opt_starting_scene.empty())
 		opt_starting_scene.clear();
 
@@ -614,6 +626,17 @@ retryScene:
 	}
 
 	disableSaving--;
+}
+
+static void unityPipeCallback(void *param, uint8_t *data, size_t size)
+{
+	//struct game_capture *gc = param;
+	if (data && size) {
+
+		blog(LOG_INFO, "Got data from unity pipe");
+		
+		//info("%s", data);
+	}
 }
 
 #define SERVICE_PATH "service.json"
@@ -1389,6 +1412,11 @@ OBSBasic::~OBSBasic()
 	config_set_bool(App()->GlobalConfig(), "BasicWindow",
 			"PreviewProgramMode", IsPreviewProgramMode());
 	config_save_safe(App()->GlobalConfig(), "tmp", nullptr);
+
+	//TODO: some message back to the client saying we are closing?
+	ipc_pipe_server_free(_unityPipe);
+
+	free(_unityPipe);
 
 #ifdef _WIN32
 	uint32_t winVer = GetWindowsVersion();

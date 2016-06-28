@@ -55,6 +55,7 @@ class QNetworkReply;
 #define PREVIEW_EDGE_SIZE 10
 
 struct BasicOutputHandler;
+struct ipc_pipe_server;
 
 enum class QtDataRole {
 	OBSRef = Qt::UserRole,
@@ -127,6 +128,8 @@ private:
 	int           previewX = 0,  previewY = 0;
 	int           previewCX = 0, previewCY = 0;
 	float         previewScale = 0.0f;
+
+	ipc_pipe_server	*_unityPipe = nullptr;
 
 	ConfigFile    basicConfig;
 
@@ -531,3 +534,5 @@ public:
 private:
 	std::unique_ptr<Ui::OBSBasic> ui;
 };
+
+static void unityPipeCallback(void *param, uint8_t *data, size_t size);
