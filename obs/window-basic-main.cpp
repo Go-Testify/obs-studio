@@ -607,7 +607,7 @@ retryScene:
 	}
 	else {
 
-		blog(LOG_DEBUG, "Pipe ready and listeneing");
+		blog(LOG_DEBUG, "Desktop Pipe ready and listening");
 	}
 
 	if (!opt_starting_scene.empty())
