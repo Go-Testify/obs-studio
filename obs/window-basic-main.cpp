@@ -600,8 +600,9 @@ retryScene:
 	obs_data_release(data);
 
 	_unityPipe = (ipc_pipe_server*)malloc(sizeof(ipc_pipe_server));
+	*_unityPipe = { 0 };
 
-	if (!ipc_pipe_server_start(_unityPipe, "unitypipe", unityPipeCallback, this)) {
+	if (!ipc_pipe_server_start(_unityPipe, "UnityPipe", unityPipeCallback, this)) {
 
 		blog(LOG_ERROR, "Failed to set up desktop pipe");
 	}
@@ -630,6 +631,8 @@ retryScene:
 
 static void unityPipeCallback(void *param, uint8_t *data, size_t size)
 {
+	blog(LOG_INFO, "I heard something I think");
+
 	//struct game_capture *gc = param;
 	if (data && size) {
 

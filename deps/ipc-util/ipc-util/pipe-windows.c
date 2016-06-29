@@ -115,10 +115,15 @@ static DWORD CALLBACK ipc_pipe_internal_server_thread(LPVOID param)
 
 	for (;;) {
 		DWORD bytes = 0;
+		LPDWORD readBytes = 0;
 		bool success;
 
-		success = !!ReadFile(pipe->handle, buf, IPC_PIPE_BUF_SIZE, NULL,
-				&pipe->overlap);
+		auto readResult = ReadFile(pipe->handle, buf, IPC_PIPE_BUF_SIZE, &readBytes,
+			&pipe->overlap);
+
+		auto lastError = GetLastError();
+
+		success = !!readResult;
 		if (!success && !ipc_pipe_internal_io_pending()) {
 			break;
 		}
