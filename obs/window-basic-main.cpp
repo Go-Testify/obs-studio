@@ -629,16 +629,53 @@ retryScene:
 	disableSaving--;
 }
 
+void OBSBasic::sendMessageToUnity(string tag, string message) {
+
+	std::string finalMessage = tag + "::" + message;
+	char messageCArray[1024];
+
+	strcpy(messageCArray, finalMessage.c_str());
+	messageCArray[finalMessage.length()] = '\0';
+
+	blog(LOG_INFO, "Attempting");
+	blog(LOG_INFO, messageCArray);
+
+	if (ipc_pipe_server_write(_unityPipe, messageCArray, sizeof(char) * 1024)) {
+
+		blog(LOG_INFO, "Sent message!");
+	}
+	else {
+
+		blog(LOG_INFO, "Failed to send");
+	}
+}
+
 static void unityPipeCallback(void *param, uint8_t *data, size_t size)
 {
 	blog(LOG_INFO, "I heard something I think");
+	OBSBasic * basicRef = static_cast<OBSBasic*>(param);
 
 	//struct game_capture *gc = param;
 	if (data && size) {
 
-		blog(LOG_INFO, "Got data from unity pipe");
+		char * messageText = new char[size + 1];
+		memcpy(messageText, data, sizeof(uint8_t) * size);
+		messageText[size] = '\0';
+
+		blog(LOG_INFO, "Got data from unity pipe");	
+		blog(LOG_INFO, messageText);
+
+		if (strcmp(messageText, "start_recording") == 0) {
+
+			basicRef->StartRecording();
+		}
+		else if (strcmp(messageText, "stop_recording") == 0) {
+
+			QMetaObject::invokeMethod(basicRef, "StopRecording",
+				Qt::QueuedConnection);
+		}
 		
-		//info("%s", data);
+		delete messageText;
 	}
 }
 
@@ -1416,7 +1453,7 @@ OBSBasic::~OBSBasic()
 			"PreviewProgramMode", IsPreviewProgramMode());
 	config_save_safe(App()->GlobalConfig(), "tmp", nullptr);
 
-	//TODO: some message back to the client saying we are closing?
+	this->sendMessageToUnity("SHUTDOWN", "");
 	ipc_pipe_server_free(_unityPipe);
 
 	free(_unityPipe);

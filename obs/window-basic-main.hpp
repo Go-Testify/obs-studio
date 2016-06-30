@@ -406,6 +406,9 @@ public:
 	void UpdateTitleBar();
 	void UpdateSceneSelection(OBSSource source);
 
+	void sendMessageToUnity(std::string tag, std::string message);
+
+
 protected:
 	virtual void closeEvent(QCloseEvent *event) override;
 	virtual void changeEvent(QEvent *event) override;

@@ -610,6 +610,8 @@ bool SimpleOutput::StartRecording()
 	obs_data_release(settings);
 
 	if (obs_output_start(fileOutput)) {
+
+		this->main->sendMessageToUnity("STARTED", strPath);
 		return true;
 	}
 
@@ -629,6 +631,8 @@ void SimpleOutput::ForceStopStreaming()
 void SimpleOutput::StopRecording()
 {
 	obs_output_stop(fileOutput);
+
+	this->main->sendMessageToUnity("STOPPED", "");
 }
 
 bool SimpleOutput::StreamingActive() const

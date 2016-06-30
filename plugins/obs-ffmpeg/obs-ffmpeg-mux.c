@@ -243,6 +243,8 @@ static int deactivate(struct ffmpeg_muxer *stream)
 		stream->sent_headers = false;
 
 		info("Output of file '%s' stopped", stream->path.array);
+
+		
 	}
 
 	return ret;

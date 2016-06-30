@@ -272,3 +272,24 @@ bool ipc_pipe_client_write(ipc_pipe_client_t *pipe, const void *data,
 
 	return !!WriteFile(pipe->handle, data, (DWORD)size, &bytes, NULL);
 }
+
+bool ipc_pipe_server_write(ipc_pipe_server_t *pipe, const void *data,
+	size_t size)
+{
+	DWORD bytes;
+
+	if (!pipe) {
+		return false;
+	}
+
+	if (!pipe->handle || pipe->handle == INVALID_HANDLE_VALUE) {
+		return false;
+	}
+
+	auto writeResult = WriteFile(pipe->handle, data, (DWORD)size, &bytes, NULL);
+
+	auto lastError = GetLastError();
+
+	bool result = !!writeResult;
+	return result;
+}
