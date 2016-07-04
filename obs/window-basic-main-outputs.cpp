@@ -632,7 +632,7 @@ void SimpleOutput::StopRecording()
 {
 	obs_output_stop(fileOutput);
 
-	this->main->sendMessageToUnity("STOPPED", "");
+	this->main->sendMessageToUnity("STOPPED", "OK");
 }
 
 bool SimpleOutput::StreamingActive() const
