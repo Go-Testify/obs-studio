@@ -303,6 +303,9 @@ public slots:
 	void SaveProjectDeferred();
 	void SaveProject();
 
+	void setSceneToKeyboard();
+	void setSceneToGamepad();
+
 private slots:
 	void AddSceneItem(OBSSceneItem item);
 	void RemoveSceneItem(OBSSceneItem item);
@@ -407,7 +410,7 @@ public:
 	void UpdateSceneSelection(OBSSource source);
 
 	void sendMessageToUnity(std::string tag, std::string message);
-
+	void setSceneToString(char * sceneName, bool sendCallbackToUnity);
 
 protected:
 	virtual void closeEvent(QCloseEvent *event) override;

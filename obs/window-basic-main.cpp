@@ -674,11 +674,55 @@ static void unityPipeCallback(void *param, uint8_t *data, size_t size)
 			QMetaObject::invokeMethod(basicRef, "StopRecording",
 				Qt::QueuedConnection);
 		}
+		else if (strcmp(messageText, "set_profile_keyboard") == 0) {
+
+			QMetaObject::invokeMethod(basicRef, "setSceneToKeyboard",
+				Qt::QueuedConnection);
+		}
+		else if (strcmp(messageText, "set_profile_controller") == 0) {
+
+			QMetaObject::invokeMethod(basicRef, "setSceneToGamepad",
+				Qt::QueuedConnection);
+		}
 		
 		delete messageText;
 	}
 	else {
 		basicRef->sendMessageToUnity("HELLO", " ");
+	}
+}
+
+
+void OBSBasic::setSceneToKeyboard()
+{
+	this->setSceneToString("Keyboard", false);
+}
+
+void OBSBasic::setSceneToGamepad()
+{
+	this->setSceneToString("Gamepad", false);
+}
+
+void OBSBasic::setSceneToString(char * sceneName, bool sendCallbackToUnity)
+{
+	obs_source_t * newScene = obs_get_source_by_name(sceneName);
+
+	std::string result = "0";
+
+	if (newScene) {
+
+		SetCurrentScene(newScene, true);
+		if (IsPreviewProgramMode())
+			TransitionToScene(newScene, true);
+
+		obs_source_release(newScene);
+
+		result = "1";
+	}
+
+	if (sendCallbackToUnity == true) {
+
+		this->sendMessageToUnity("SceneCallback", result);
 	}
 }
 
