@@ -143,6 +143,7 @@ private:
 
 	void          CreateFirstRunSources();
 	void          CreateDefaultScene(bool firstStart);
+	void		  copyTemplateConfigDirectory();
 
 	void          ClearVolumeControls();
 

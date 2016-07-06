@@ -30,7 +30,7 @@ template <typename Func> static void EnumSceneCollections(Func &&cb)
 	os_glob_t *glob;
 
 	int ret = GetConfigPath(path, sizeof(path),
-			"obs-studio/basic/scenes/*.json");
+			"testify-obs-studio/basic/scenes/*.json");
 	if (ret <= 0) {
 		blog(LOG_WARNING, "Failed to get config path for scene "
 		                  "collections");
@@ -130,7 +130,7 @@ static bool GetSceneCollectionName(QWidget *parent, std::string &name,
 		return false;
 	}
 
-	ret = GetConfigPath(path, sizeof(path), "obs-studio/basic/scenes/");
+	ret = GetConfigPath(path, sizeof(path), "testify-obs-studio/basic/scenes/");
 	if (ret <= 0) {
 		blog(LOG_WARNING, "Failed to get scene collection config path");
 		return false;
@@ -246,7 +246,7 @@ void OBSBasic::on_actionRenameSceneCollection_triggered()
 	SaveProjectNow();
 
 	char path[512];
-	int ret = GetConfigPath(path, 512, "obs-studio/basic/scenes/");
+	int ret = GetConfigPath(path, 512, "testify-obs-studio/basic/scenes/");
 	if (ret <= 0) {
 		blog(LOG_WARNING, "Failed to get scene collection config path");
 		return;
@@ -303,7 +303,7 @@ void OBSBasic::on_actionRemoveSceneCollection_triggered()
 		return;
 
 	char path[512];
-	int ret = GetConfigPath(path, 512, "obs-studio/basic/scenes/");
+	int ret = GetConfigPath(path, 512, "testify-obs-studio/basic/scenes/");
 	if (ret <= 0) {
 		blog(LOG_WARNING, "Failed to get scene collection config path");
 		return;
