@@ -1023,7 +1023,7 @@ static void delete_oldest_file(const char *location)
 
 static void get_last_log(void)
 {
-	BPtr<char>       logDir(GetConfigPathPtr("obs-studio/logs"));
+	BPtr<char>       logDir(GetConfigPathPtr("testify-obs-studio/logs"));
 	struct os_dirent *entry;
 	os_dir_t         *dir        = os_opendir(logDir);
 	uint64_t         highest_ts = 0;
@@ -1173,14 +1173,14 @@ static void create_log_file(fstream &logFile)
 	get_last_log();
 
 	currentLogFile = GenerateTimeDateFilename("txt");
-	dst << "obs-studio/logs/" << currentLogFile.c_str();
+	dst << "testify-obs-studio/logs/" << currentLogFile.c_str();
 
 	BPtr<char> path(GetConfigPathPtr(dst.str().c_str()));
 	logFile.open(path,
 			ios_base::in | ios_base::out | ios_base::trunc);
 
 	if (logFile.is_open()) {
-		delete_oldest_file("obs-studio/logs");
+		delete_oldest_file("testify-obs-studio/logs");
 		base_set_log_handler(do_log, &logFile);
 	} else {
 		blog(LOG_ERROR, "Failed to open log file");
@@ -1226,7 +1226,7 @@ static void SaveProfilerData(const ProfilerSnapshot &snap)
 
 #define LITERAL_SIZE(x) x, (sizeof(x) - 1)
 	ostringstream dst;
-	dst.write(LITERAL_SIZE("obs-studio/profiler_data/"));
+	dst.write(LITERAL_SIZE("testify-obs-studio/profiler_data/"));
 	dst.write(currentLogFile.c_str(), pos);
 	dst.write(LITERAL_SIZE(".csv.gz"));
 #undef LITERAL_SIZE
@@ -1290,7 +1290,7 @@ static int run_program(fstream &logFile, int argc, char *argv[])
 		OBSTranslator translator;
 
 		create_log_file(logFile);
-		delete_oldest_file("obs-studio/profiler_data");
+		delete_oldest_file("testify-obs-studio/profiler_data");
 
 		program.installTranslator(&translator);
 
@@ -1317,7 +1317,7 @@ static int run_program(fstream &logFile, int argc, char *argv[])
 #define CRASH_MESSAGE \
 	"Woops, OBS has crashed!\n\nWould you like to copy the crash log " \
 	"to the clipboard?  (Crash logs will still be saved to the " \
-	"%appdata%\\obs-studio\\crashes directory)"
+	"%appdata%\\testify-obs-studio\\crashes directory)"
 
 static void main_crash_handler(const char *format, va_list args, void *param)
 {
@@ -1326,9 +1326,9 @@ static void main_crash_handler(const char *format, va_list args, void *param)
 	vsnprintf(text, MAX_CRASH_REPORT_SIZE, format, args);
 	text[MAX_CRASH_REPORT_SIZE - 1] = 0;
 
-	delete_oldest_file("obs-studio/crashes");
+	delete_oldest_file("testify-obs-studio/crashes");
 
-	string name = "obs-studio/crashes/Crash ";
+	string name = "testify-obs-studio/crashes/Crash ";
 	name += GenerateTimeDateFilename("txt");
 
 	BPtr<char> path(GetConfigPathPtr(name.c_str()));

@@ -143,7 +143,7 @@ private:
 
 	void          CreateFirstRunSources();
 	void          CreateDefaultScene(bool firstStart);
-	void		  copyTemplateConfigDirectory();
+	bool		  copyTemplateConfigDirectory();
 
 	void          ClearVolumeControls();
 
@@ -543,3 +543,4 @@ private:
 };
 
 static void unityPipeCallback(void *param, uint8_t *data, size_t size);
+bool copyFileFromDataToConfig(const char * dataFile, const char * configLocation);

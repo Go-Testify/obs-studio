@@ -568,7 +568,7 @@ void os_end_high_performance(os_performance_token_t *token)
 	UNUSED_PARAMETER(token);
 }
 
-int os_copyfile(const char *file_in, const char *file_out)
+int os_copyfileWithOverwrite(const char *file_in, const char *file_out, bool shouldOverwrite)
 {
 	wchar_t *file_in_utf16 = NULL;
 	wchar_t *file_out_utf16 = NULL;
@@ -581,12 +581,23 @@ int os_copyfile(const char *file_in, const char *file_out)
 		goto error;
 	}
 
-	code = CopyFileW(file_in_utf16, file_out_utf16, true) ? 0 : -1;
+	code = CopyFileW(file_in_utf16, file_out_utf16, !shouldOverwrite) ? 0 : -1;
 
 error:
 	bfree(file_in_utf16);
 	bfree(file_out_utf16);
 	return code;
+}
+
+
+int os_copyfileOverwrite(const char *file_in, const char *file_out)
+{
+	return os_copyfileWithOverwrite(file_in, file_out, true);
+}
+
+int os_copyfile(const char *file_in, const char *file_out)
+{
+	return os_copyfileWithOverwrite(file_in, file_out, false);
 }
 
 char *os_getcwd(char *path, size_t size)

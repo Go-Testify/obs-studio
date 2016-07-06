@@ -441,14 +441,32 @@ void OBSBasic::CreateDefaultScene(bool firstStart)
 	disableSaving--;
 }
 
-void OBSBasic::copyTemplateConfigDirectory() {
+bool OBSBasic::copyTemplateConfigDirectory() {
 
 	disableSaving++;
 
+	bool result = false;
 
-
+	result = copyFileFromDataToConfig("templates/basic/profiles/Untitled/basic.ini", "testify-obs-studio/basic/profiles/Untitled/basic.ini")
+		&& copyFileFromDataToConfig("templates/basic/scenes/Untitled.json", "testify-obs-studio/basic/scenes/Untitled.json")
+		&& copyFileFromDataToConfig("templates/basic/scenes/Untitled.json.bak", "testify-obs-studio/basic/scenes/Untitled.json.bak");
+	
 	disableSaving--;
+
+	return result;
 }
+
+bool copyFileFromDataToConfig(const char * dataFile, const char * configLocation) {
+
+	std::string localTemplatePath;
+	GetDataFilePath(dataFile, localTemplatePath);
+
+	char configPath[512];
+	GetConfigPath(configPath, sizeof(configPath), configLocation);
+
+	return os_copyfileOverwrite(localTemplatePath.c_str(), configPath) != -1;
+}
+
 
 static void ReorderItemByName(QListWidget *lw, const char *name, int newIndex)
 {
@@ -482,10 +500,20 @@ void OBSBasic::LoadSceneListOrder(obs_data_array_t *array)
 void OBSBasic::Load(const char *file)
 {
 	if (!file || !os_file_exists(file)) {
-		blog(LOG_INFO, "No scene file found, creating default scene");
-		CreateDefaultScene(true);
-		SaveProject();
-		return;
+
+		if (this->copyTemplateConfigDirectory() == false) {
+
+			blog(LOG_INFO, "No scene file found, creating default scene");
+			CreateDefaultScene(true);
+			SaveProject();
+			return;
+		}
+		else {
+
+			blog(LOG_INFO, "No scene file found, copied from template");
+
+			SaveProject();
+		}
 	}
 
 	disableSaving++;
@@ -581,6 +609,9 @@ retryScene:
 		curProgramScene = curScene;
 		obs_source_addref(curScene);
 	}
+
+	//TODO: here is where I should check the source width/height and then change the browser source and the window source's x/y positions to be the size of the screen
+	//TODO:  then I need to save the setup to file, and update the current GUI objects as they arein the scee to be at the right locations
 
 	SetCurrentScene(curScene, true);
 	if (IsPreviewProgramMode())
