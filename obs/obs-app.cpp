@@ -824,10 +824,13 @@ static bool StartupOBS(const char *locale, profiler_name_store_t *store)
 bool OBSApp::OBSInit()
 {
 	ProfileScope("OBSApp::OBSInit");
-
+	/*
 	bool licenseAccepted = config_get_bool(globalConfig, "General",
 			"LicenseAccepted");
+	*/
 	OBSLicenseAgreement agreement(nullptr);
+
+	bool licenseAccepted = true;
 
 	if (licenseAccepted || agreement.exec() == QDialog::Accepted) {
 		if (!licenseAccepted) {

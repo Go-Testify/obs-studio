@@ -49,8 +49,8 @@
         "sync": 0,
         "volume": 1.0
     },
-    "current_program_scene": "Gamepad",
-    "current_scene": "Gamepad",
+    "current_program_scene": "Keyboard",
+    "current_scene": "Keyboard",
     "current_transition": "Fade",
     "name": "Untitled",
     "quick_transitions": [
@@ -219,7 +219,7 @@
                         "visible": true
                     },
                     {
-                        "align": 10,
+                        "align": 5,
                         "bounds": {
                             "x": 806.0,
                             "y": 237.0
@@ -232,8 +232,8 @@
                         "crop_top": 0,
                         "name": "Window Capture",
                         "pos": {
-                            "x": 1920.0,
-                            "y": 1080.0
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "rot": 0.0,
                         "scale": {
@@ -294,7 +294,7 @@
                         "visible": true
                     },
                     {
-                        "align": 10,
+                        "align": 5,
                         "bounds": {
                             "x": 1.0,
                             "y": 1.0
@@ -307,8 +307,8 @@
                         "crop_top": 0,
                         "name": "BrowserSource",
                         "pos": {
-                            "x": 1920.0,
-                            "y": 1080.0
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "rot": 0.0,
                         "scale": {
