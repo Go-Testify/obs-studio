@@ -3,6 +3,8 @@
 #include "audio-encoders.hpp"
 #include "window-basic-main.hpp"
 #include "window-basic-main-outputs.hpp"
+#include "platform.hpp"
+#include <util/platform.h>
 
 using namespace std;
 
@@ -556,9 +558,15 @@ bool SimpleOutput::StartRecording()
 
 	if (!Active())
 		SetupOutputs();
+	
+	//const char *path = config_get_string(main->Config(),
+		//	"SimpleOutput", "FilePath");
 
-	const char *path = config_get_string(main->Config(),
-			"SimpleOutput", "FilePath");
+	//always save screen recordings to the data folder
+	std::string pathString;
+	GetDataFilePath("", pathString);
+	const char *path = pathString.c_str();
+
 	const char *format = config_get_string(main->Config(),
 			"SimpleOutput", "RecFormat");
 	const char *mux = config_get_string(main->Config(), "SimpleOutput",
@@ -610,8 +618,8 @@ bool SimpleOutput::StartRecording()
 	obs_data_release(settings);
 
 	if (obs_output_start(fileOutput)) {
-
-		this->main->sendMessageToUnity("STARTED", strPath);
+		
+		this->main->sendMessageToUnity("STARTED", os_get_abs_path_ptr(strPath.c_str()));
 		return true;
 	}
 
