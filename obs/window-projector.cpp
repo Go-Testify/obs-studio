@@ -50,7 +50,7 @@ void OBSProjector::Init(int monitor)
 		obs_source_inc_showing(source);
 
 	QAction *action = new QAction(this);
-	action->setShortcut(Qt::Key_Escape);
+	//action->setShortcut(Qt::Key_Escape);
 	addAction(action);
 
 	connect(action, SIGNAL(triggered()), this, SLOT(EscapeTriggered()));

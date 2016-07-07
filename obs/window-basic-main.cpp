@@ -226,10 +226,10 @@ OBSBasic::OBSBasic(QWidget *parent)
 		connect(nudge, SIGNAL(triggered()), this, s);
 	};
 
-	addNudge(Qt::Key_Up, SLOT(NudgeUp()));
-	addNudge(Qt::Key_Down, SLOT(NudgeDown()));
-	addNudge(Qt::Key_Left, SLOT(NudgeLeft()));
-	addNudge(Qt::Key_Right, SLOT(NudgeRight()));
+	//addNudge(Qt::Key_Up, SLOT(NudgeUp()));
+	//addNudge(Qt::Key_Down, SLOT(NudgeDown()));
+	//addNudge(Qt::Key_Left, SLOT(NudgeLeft()));
+	//addNudge(Qt::Key_Right, SLOT(NudgeRight()));
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,
@@ -4234,7 +4234,7 @@ void OBSBasic::UpdateTitleBar()
 	const char *sceneCollection = config_get_string(App()->GlobalConfig(),
 			"Basic", "SceneCollection");
 
-	name << "OBS ";
+	name << "Testify powered by OBS ";
 	if (previewProgramMode)
 		name << "Studio ";
 

@@ -57,6 +57,9 @@
             </property>
             <item>
              <widget class="OBSBasicPreview" name="preview" native="true">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -83,6 +86,9 @@
         </item>
         <item>
          <widget class="QLabel" name="previewDisabledLabel">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -112,7 +118,7 @@
           <item>
            <widget class="QPushButton" name="streamButton">
             <property name="enabled">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -131,7 +137,7 @@
           <item>
            <widget class="QPushButton" name="recordButton">
             <property name="enabled">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -152,6 +158,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="modeSwitch">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Basic.TogglePreviewProgramMode</string>
             </property>
@@ -162,6 +171,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="settingsButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -175,6 +187,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="exitButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -243,16 +258,7 @@
             <property name="spacing">
              <number>0</number>
             </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
+            <property name="margin">
              <number>0</number>
             </property>
            </layout>
@@ -294,20 +300,14 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
+             <property name="margin">
               <number>0</number>
              </property>
              <item>
               <widget class="QListWidget" name="scenes">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -340,6 +340,9 @@
              </item>
              <item>
               <widget class="QToolBar" name="scenesToolbar">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="iconSize">
                 <size>
                  <width>16</width>
@@ -484,20 +487,14 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
+             <property name="margin">
               <number>0</number>
              </property>
              <item>
               <widget class="SourceListWidget" name="sources">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -530,6 +527,9 @@
              </item>
              <item>
               <widget class="QToolBar" name="sourcesToolbar">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="iconSize">
                 <size>
                  <width>16</width>
@@ -582,6 +582,9 @@
           </property>
           <item>
            <widget class="QComboBox" name="transitions">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -610,6 +613,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="transitionAdd">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>
@@ -645,6 +651,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="transitionRemove">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>
@@ -680,6 +689,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="transitionProps">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>
@@ -738,6 +750,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="transitionDuration">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="suffix">
                <string>ms</string>
               </property>
@@ -786,6 +801,9 @@
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -810,6 +828,9 @@
     <addaction name="actionE_xit"/>
    </widget>
    <widget class="QMenu" name="menuBasic_MainMenu_Help">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Basic.MainMenu.Help</string>
     </property>
@@ -832,6 +853,9 @@
      <string>Basic.MainMenu.Edit</string>
     </property>
     <widget class="QMenu" name="transformMenu">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Basic.MainMenu.Edit.Transform</string>
      </property>
@@ -1021,6 +1045,9 @@
    </property>
   </action>
   <action name="actionShow_Recordings">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Basic.MainMenu.File.ShowRecordings</string>
    </property>
@@ -1186,11 +1213,17 @@
    </property>
   </action>
   <action name="actionWebsite">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Basic.MainMenu.Help.Website</string>
    </property>
   </action>
   <action name="actionNewSceneCollection">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
@@ -1211,6 +1244,9 @@
    </property>
   </action>
   <action name="actionNewProfile">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
