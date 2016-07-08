@@ -449,7 +449,9 @@ bool OBSBasic::copyTemplateConfigDirectory() {
 
 	result = copyFileFromDataToConfig("templates/basic/profiles/Untitled/basic.ini", "testify-obs-studio/basic/profiles/Untitled/basic.ini")
 		&& copyFileFromDataToConfig("templates/basic/scenes/Untitled.json", "testify-obs-studio/basic/scenes/Untitled.json")
-		&& copyFileFromDataToConfig("templates/basic/scenes/Untitled.json.bak", "testify-obs-studio/basic/scenes/Untitled.json.bak");
+		&& copyFileFromDataToConfig("templates/basic/scenes/Untitled.json.bak", "testify-obs-studio/basic/scenes/Untitled.json.bak")
+		//&& copyFileFromDataToConfig("templates/global.ini", "testify-obs-studio/global.ini")
+		;
 	
 	disableSaving--;
 
@@ -888,7 +890,7 @@ bool OBSBasic::InitBasicConfigDefaults()
 	config_set_default_string(basicConfig, "SimpleOutput", "FilePath",
 			GetDefaultVideoSavePath().c_str());
 	config_set_default_string(basicConfig, "SimpleOutput", "RecFormat",
-			"flv");
+			"mp4");
 	config_set_default_uint  (basicConfig, "SimpleOutput", "VBitrate",
 			2500);
 	config_set_default_string(basicConfig, "SimpleOutput", "StreamEncoder",
@@ -915,7 +917,7 @@ bool OBSBasic::InitBasicConfigDefaults()
 
 	config_set_default_string(basicConfig, "AdvOut", "RecFilePath",
 			GetDefaultVideoSavePath().c_str());
-	config_set_default_string(basicConfig, "AdvOut", "RecFormat", "flv");
+	config_set_default_string(basicConfig, "AdvOut", "RecFormat", "mp4");
 	config_set_default_bool  (basicConfig, "AdvOut", "RecUseRescale",
 			false);
 	config_set_default_uint  (basicConfig, "AdvOut", "RecTracks", (1<<0));
