@@ -47,11 +47,11 @@
             "device_id": "default"
         },
         "sync": 0,
-        "volume": 1.0
+        "volume": 0.10000000149011612
     },
-    "current_program_scene": "Keyboard",
-    "current_scene": "Keyboard",
-    "current_transition": "Fade",
+    "current_program_scene": "Gamepad",
+    "current_scene": "Gamepad",
+    "current_transition": "Cut",
     "name": "Untitled",
     "quick_transitions": [
         {
