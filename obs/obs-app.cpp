@@ -585,6 +585,7 @@ bool OBSApp::InitLocale()
 	if (userLocale && defaultLang)
 		return true;
 
+	/*
 	if (!userLocale && defaultLang) {
 		for (auto &locale_ : GetPreferredLocales()) {
 			if (locale_ == lang)
@@ -608,6 +609,7 @@ bool OBSApp::InitLocale()
 
 		return true;
 	}
+	*/
 
 	stringstream file;
 	file << "locale/" << lang << ".ini";
