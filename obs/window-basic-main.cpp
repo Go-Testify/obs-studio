@@ -729,9 +729,6 @@ static void unityPipeCallback(void *param, uint8_t *data, size_t size)
 		
 		delete messageText;
 	}
-	else {
-		basicRef->sendMessageToUnity("HELLO", " ");
-	}
 }
 
 
